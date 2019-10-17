@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title> Donetask-todolist </title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+    <br>
+        <form method = 'POST'>
+        {% csrf_token %}
+            <div class="form-group">
+            <input type="text" name = 'task' class="form-control" placeholder="New Task">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    <br>
+        <table class="table table-bordered">
+            <thead class="thead-dark text-justify">
+                <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Done</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in all_task %}
+                    {% if obj.done %}
+                        <tr class="table-success">
+                        <td> {{obj.task}} </th>
+                        <td> Completed </td>
+                        <td>Edit</td>
+                        <td>Delete</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                        <td> {{obj.task}} </th>
+                        <td> Not Completed </td>
+                        <td>Edit</td>
+                        <td>Delete</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}
